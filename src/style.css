@@ -193,7 +193,7 @@ body {
   }
 }
 
-/* ============ 故事时间线 ============ */
+/* ============ 故事时间线（横向时间轴） ============ */
 
 #timeline {
   position: absolute;
@@ -201,50 +201,101 @@ body {
   right: 0;
   bottom: 0;
   z-index: 2;
-  display: flex;
-  gap: 6px;
-  align-items: center;
   overflow-x: auto;
-  padding: 10px 12px;
+  overflow-y: hidden;
+  padding: 0 24px;
   background: rgb(255 255 255 / 92%);
   border-top: 1px solid var(--border);
   scrollbar-width: thin;
 }
 
-.timeline-chip {
-  display: inline-flex;
+.tl-track {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 64px;
+  min-width: 760px;
+}
+
+/* 贯穿轴线：与所有节点圆点同一水平中心 */
+.tl-track::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  left: 10px;
+  height: 2px;
+  margin-top: -1px;
+  background: #d8d2c8;
+  border-radius: 1px;
+}
+
+.tl-node {
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
   flex-shrink: 0;
-  padding: 5px 10px;
+  padding: 0 6px;
   font-size: 12px;
   color: var(--ink);
-  background: #f6f3ef;
-  border: 1px solid var(--border);
-  border-radius: 999px;
+  background: none;
+  border: none;
   cursor: pointer;
-  white-space: nowrap;
 }
 
-.timeline-chip:hover {
-  border-color: var(--accent);
-}
-
-.timeline-chip.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-
-.chip-season {
-  width: 8px;
-  height: 8px;
+.tl-dot {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  background: var(--dot-color, var(--muted));
+  border: 2px solid #fff;
   border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--border);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-.chip-no {
+.tl-node:hover .tl-dot {
+  transform: scale(1.35);
+}
+
+.tl-node.active .tl-dot {
+  transform: scale(1.5);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.tl-label {
+  position: absolute;
+  left: 50%;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+/* 标签上下交替排布，节点圆点始终落在轴线上 */
+.tl-node:not(.flip) .tl-label {
+  top: calc(50% + 11px);
+}
+
+.tl-node.flip .tl-label {
+  bottom: calc(50% + 11px);
+}
+
+.tl-label .tl-no {
+  margin-right: 2px;
   font-size: 10px;
-  opacity: 0.7;
+  color: var(--muted);
+}
+
+.tl-node:hover .tl-label {
+  color: var(--accent);
+}
+
+.tl-node.active .tl-label {
+  font-weight: 600;
+  color: var(--accent);
 }
 
 #detail-panel {
