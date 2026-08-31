@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+# push 到 main 即自动构建并发布到 gh-pages 分支；
+# 也支持在 Actions 页面手动触发（workflow_dispatch）
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  # GITHUB_TOKEN 需要写权限才能推送 gh-pages 分支
+  contents: write
+
+concurrency:
+  # 同一时间只保留一个部署，避免连续 push 时互相踩
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to gh-pages
+        # 与本地 `npx gh-pages -d dist` 等价：把 dist 发布到 gh-pages 分支
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          commit_message: "deploy: ${{ github.event.head_commit.message }}"
