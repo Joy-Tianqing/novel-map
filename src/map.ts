@@ -18,11 +18,12 @@ export interface MapHandles {
   fitHome: () => void;
   /** 视野适配上下班通勤路线（横须贺线东京—镰仓），并显示路线图层 */
   fitCommute: () => void;
-  /** 飞行到指定地点并打开其 popup */
+  /** 选中指定地点并打开其 popup（视野不动，平移/缩放由用户控制） */
   flyTo: (location: LocationData) => void;
   /** 关闭全部 popup（同步关闭选中态时用） */
   clearPopups: () => void;
-  /** 按章节筛选：仅显示章节相关的 marker / 线，其余隐藏；null 表示未选章节（全隐藏） */
+  /** 按章节筛选：仅显示章节相关的 marker / 线，其余隐藏；null 表示未选章节（全部）；
+   *  切换时视野会适配到当前可见地点的范围 */
   setActiveChapters: (chapters: number[] | null) => void;
 }
 
@@ -292,6 +293,32 @@ export function initMap(
     map.fitBounds(boundsOf(pointLocations), { padding: FIT_PADDING, maxZoom: 12 });
   });
 
+  // 切换章节时视野适配：聚焦当前章节相关地点的范围（点 + 可见的线）
+  const fitToChapters = (chapters: number[] | null): void => {
+    const bounds = new LngLatBounds();
+    let hasPoint = false;
+    for (const l of pointLocations) {
+      if (chapters === null || l.chapters.some((c) => chapters.includes(c))) {
+        bounds.extend([l.lng, l.lat]);
+        hasPoint = true;
+      }
+    }
+    // 章节包含线状地点时，把线的范围也纳入视野
+    const lineInChapter =
+      lineLocation !== undefined &&
+      chapters !== null &&
+      lineLocation.chapters.some((c) => chapters.includes(c));
+    if (lineInChapter) {
+      const lineBounds = routeBounds ?? stationBounds();
+      bounds.extend(lineBounds.getSouthWest()).extend(lineBounds.getNorthEast());
+    }
+    if (hasPoint) {
+      map.fitBounds(bounds, { padding: FIT_PADDING, maxZoom: 14 });
+    } else if (lineInChapter) {
+      focusLine();
+    }
+  };
+
   return {
     map,
     fitAll: () => {
@@ -313,16 +340,7 @@ export function initMap(
       }
       // 选中任何点状地点时收起路线，保持「marker 或线」互斥
       // （refreshLine 依据 selectedLocation 自动处理）
-      // 避开右侧详情面板/底部时间线，让目标点落在可见区域中心
-      const mobile = window.innerWidth <= 768;
-      map.flyTo({
-        center: [location.lng, location.lat],
-        zoom: 13,
-        duration: 1200,
-        padding: mobile
-          ? { top: 60, bottom: window.innerHeight * 0.62, left: 40, right: 40 }
-          : { top: 80, bottom: 110, left: 80, right: 400 },
-      });
+      // 视野不动：只打开 popup，平移/缩放均由用户自己控制
       popups.get(location.id)?.addTo(map);
     },
     clearPopups: closeAllPopups,
@@ -330,6 +348,7 @@ export function initMap(
       currentChapters = chapters;
       refreshMarkers();
       refreshLine();
+      fitToChapters(chapters);
     },
   };
 }
