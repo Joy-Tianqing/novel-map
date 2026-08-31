@@ -1,0 +1,311 @@
+[
+  {
+    "id": "location_01",
+    "name_cn": "东京",
+    "name_jp": "東京",
+    "type": "scene",
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  {
+    "id": "location_02",
+    "name_cn": "东京大学",
+    "name_jp": "東京大学",
+    "type": "scene",
+    "chapters": [
+      14
+    ]
+  },
+  {
+    "id": "location_03",
+    "name_cn": "东京站",
+    "name_jp": "東京駅",
+    "type": "scene",
+    "chapters": [
+      1,
+      16
+    ]
+  },
+  {
+    "id": "location_04",
+    "name_cn": "丹那隧道",
+    "name_jp": "丹那トンネル",
+    "type": "scene",
+    "chapters": [
+      6
+    ]
+  },
+  {
+    "id": "location_05",
+    "name_cn": "伊豆莲台寺温泉",
+    "name_jp": "蓮台寺温泉",
+    "type": "scene",
+    "chapters": [
+      13
+    ]
+  },
+  {
+    "id": "location_06",
+    "name_cn": "新宿",
+    "name_jp": "新宿",
+    "type": "scene",
+    "chapters": [
+      11
+    ]
+  },
+  {
+    "id": "location_07",
+    "name_cn": "新宿御苑",
+    "name_jp": "新宿御苑",
+    "type": "scene",
+    "chapters": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "location_08",
+    "name_cn": "本乡",
+    "name_jp": "本郷",
+    "type": "scene",
+    "chapters": [
+      4,
+      8,
+      14
+    ]
+  },
+  {
+    "id": "location_09",
+    "name_cn": "沼津",
+    "name_jp": "沼津",
+    "type": "scene",
+    "chapters": [
+      15,
+      16
+    ]
+  },
+  {
+    "id": "location_10",
+    "name_cn": "热海",
+    "name_jp": "熱海",
+    "type": "scene",
+    "chapters": [
+      6
+    ]
+  },
+  {
+    "id": "location_11",
+    "name_cn": "筑地",
+    "name_jp": "築地",
+    "type": "scene",
+    "chapters": [
+      14
+    ]
+  },
+  {
+    "id": "location_12",
+    "name_cn": "镰仓",
+    "name_jp": "鎌倉",
+    "type": "scene",
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  {
+    "id": "location_13",
+    "name_cn": "长谷",
+    "name_jp": "長谷",
+    "type": "scene",
+    "chapters": [
+      9
+    ]
+  },
+  {
+    "id": "location_14",
+    "name_cn": "高德院大佛",
+    "name_jp": "高徳院大仏",
+    "type": "scene",
+    "chapters": [
+      9
+    ]
+  },
+  {
+    "id": "location_15",
+    "name_cn": "九段下",
+    "name_jp": "九段下",
+    "type": "transit",
+    "chapters": [
+      15
+    ]
+  },
+  {
+    "id": "location_16",
+    "name_cn": "保土谷",
+    "name_jp": "保土ケ谷",
+    "type": "transit",
+    "chapters": [
+      8,
+      16
+    ]
+  },
+  {
+    "id": "location_17",
+    "name_cn": "六乡",
+    "name_jp": "六郷",
+    "type": "transit",
+    "chapters": [
+      10,
+      11
+    ]
+  },
+  {
+    "id": "location_18",
+    "name_cn": "函南",
+    "name_jp": "函南",
+    "type": "transit",
+    "chapters": [
+      6
+    ]
+  },
+  {
+    "id": "location_19",
+    "name_cn": "北镰仓",
+    "name_jp": "北鎌倉",
+    "type": "transit",
+    "chapters": [
+      8
+    ]
+  },
+  {
+    "id": "location_20",
+    "name_cn": "品川",
+    "name_jp": "品川",
+    "type": "transit",
+    "chapters": [
+      9,
+      16
+    ]
+  },
+  {
+    "id": "location_21",
+    "name_cn": "大船",
+    "name_jp": "大船",
+    "type": "transit",
+    "chapters": [
+      16
+    ]
+  },
+  {
+    "id": "location_22",
+    "name_cn": "安艺的宫岛",
+    "name_jp": "宮島",
+    "type": "transit",
+    "chapters": [
+      5
+    ]
+  },
+  {
+    "id": "location_23",
+    "name_cn": "富士山",
+    "name_jp": "富士山",
+    "type": "transit",
+    "chapters": [
+      16
+    ]
+  },
+  {
+    "id": "location_24",
+    "name_cn": "户冢",
+    "name_jp": "戸塚",
+    "type": "transit",
+    "chapters": [
+      8,
+      15,
+      16
+    ]
+  },
+  {
+    "id": "location_25",
+    "name_cn": "横滨站",
+    "name_jp": "横浜駅",
+    "type": "transit",
+    "chapters": [
+      16
+    ]
+  },
+  {
+    "id": "location_26",
+    "name_cn": "横须贺线",
+    "name_jp": "横須賀線",
+    "type": "transit",
+    "chapters": [
+      3,
+      6,
+      8,
+      9,
+      10,
+      11,
+      15,
+      16
+    ]
+  },
+  {
+    "id": "location_27",
+    "name_cn": "池上",
+    "name_jp": "池上",
+    "type": "transit",
+    "chapters": [
+      10,
+      11
+    ]
+  },
+  {
+    "id": "location_28",
+    "name_cn": "越后",
+    "name_jp": "越後",
+    "type": "transit",
+    "chapters": [
+      16
+    ]
+  },
+  {
+    "id": "location_29",
+    "name_cn": "镰仓站",
+    "name_jp": "鎌倉駅",
+    "type": "transit",
+    "chapters": [
+      1,
+      3,
+      10
+    ]
+  },
+  {
+    "id": "location_30",
+    "name_cn": "鹤见站",
+    "name_jp": "鶴見駅",
+    "type": "transit",
+    "chapters": [
+      15
+    ]
+  }
+]

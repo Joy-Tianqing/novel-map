@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>山音文学地图</title>
+  </head>
+  <body>
+    <div id="app">
+      <aside id="sidebar">
+        <header class="sidebar-header">
+          <h1>山音文学地图</h1>
+          <p class="subtitle">川端康成《山音》中的地点</p>
+          <div class="view-presets">
+            <button id="view-all" type="button">全部地点</button>
+            <button id="view-home" type="button">家附近</button>
+            <button id="view-commute" type="button">通勤路线</button>
+          </div>
+        </header>
+        <nav id="location-list" aria-label="地点清单"></nav>
+      </aside>
+      <main id="map-container">
+        <div id="map"></div>
+        <div id="map-loading" aria-hidden="true"></div>
+        <nav id="timeline" aria-label="故事时间线"></nav>
+        <section id="detail-panel" class="hidden" aria-label="地点详情"></section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
