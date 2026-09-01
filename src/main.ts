@@ -26,6 +26,21 @@ async function main(): Promise<void> {
     return;
   }
 
+  // ============ 移动端：地点清单折叠 ============
+  // 仅移动端样式生效；选中地点时自动收起，把空间让给地图与详情抽屉
+  const appEl = document.getElementById("app")!;
+  const sidebarToggle = document.getElementById("sidebar-toggle")!;
+
+  const setSidebarCollapsed = (collapsed: boolean): void => {
+    appEl.classList.toggle("sidebar-collapsed", collapsed);
+    sidebarToggle.textContent = collapsed ? "展开清单 ▾" : "收起清单 ▴";
+    sidebarToggle.setAttribute("aria-expanded", String(!collapsed));
+  };
+
+  sidebarToggle.addEventListener("click", () => {
+    setSidebarCollapsed(!appEl.classList.contains("sidebar-collapsed"));
+  });
+
   // ============ 选中态：面板 + popup + 清单高亮 统一管理 ============
 
   let handles: MapHandles | null = null;
@@ -50,6 +65,7 @@ async function main(): Promise<void> {
       return;
     }
     selectedId = location.id;
+    setSidebarCollapsed(true); // 移动端选中后收起清单，避免长时间遮挡地图
     panel.show(location);
     highlightListItem(location.id);
     handles?.flyTo(location);
