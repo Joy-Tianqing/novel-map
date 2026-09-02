@@ -22,7 +22,9 @@ export function renderTimeline(
   const setActive = (no: number | null): void => {
     active = no;
     for (const [n, node] of nodes) {
-      node.classList.toggle("active", active === null ? n === 0 : n === active);
+      const selected = active === null ? n === 0 : n === active;
+      node.classList.toggle("active", selected);
+      node.setAttribute("aria-pressed", String(selected));
     }
   };
 
@@ -38,6 +40,7 @@ export function renderTimeline(
     node.className = `tl-node${flip ? " flip" : ""}`;
     node.dataset.chapter = String(no);
     node.title = title;
+    node.setAttribute("aria-label", title);
     node.style.setProperty("--dot-color", dotColor);
 
     const dot = document.createElement("span");

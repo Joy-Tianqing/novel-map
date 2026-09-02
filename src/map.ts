@@ -67,6 +67,12 @@ const COMMUTE_STATIONS: Array<[string, number, number]> = [
 
 const FIT_PADDING = { top: 60, bottom: 90, left: 60, right: 60 };
 
+/** 尊重系统「减弱动态效果」偏好：地图平移/缩放不做过渡动画 */
+const REDUCED_MOTION =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const FIT_ANIM = { animate: !REDUCED_MOTION };
+
 function createPopup(location: LocationData): Popup {
   const label = TYPE_LABEL[location.location_type];
   return new Popup({ offset: 24, closeButton: true, maxWidth: "280px" })
@@ -199,6 +205,7 @@ export function initMap(
     map.fitBounds(routeBounds ?? stationBounds(), {
       padding: FIT_PADDING,
       maxZoom: 12,
+      ...FIT_ANIM,
     });
   };
 
@@ -290,7 +297,11 @@ export function initMap(
 
   // 初始就绪后自动适配全部地点，第一眼即见全貌
   map.on("load", () => {
-    map.fitBounds(boundsOf(pointLocations), { padding: FIT_PADDING, maxZoom: 12 });
+    map.fitBounds(boundsOf(pointLocations), {
+      padding: FIT_PADDING,
+      maxZoom: 12,
+      ...FIT_ANIM,
+    });
   });
 
   // 切换章节时视野适配：聚焦当前章节相关地点的范围（点 + 可见的线）
@@ -313,7 +324,7 @@ export function initMap(
       bounds.extend(lineBounds.getSouthWest()).extend(lineBounds.getNorthEast());
     }
     if (hasPoint) {
-      map.fitBounds(bounds, { padding: FIT_PADDING, maxZoom: 14 });
+      map.fitBounds(bounds, { padding: FIT_PADDING, maxZoom: 14, ...FIT_ANIM });
     } else if (lineInChapter) {
       focusLine();
     }
@@ -322,11 +333,15 @@ export function initMap(
   return {
     map,
     fitAll: () => {
-      map.fitBounds(boundsOf(pointLocations), { padding: FIT_PADDING, maxZoom: 12 });
+      map.fitBounds(boundsOf(pointLocations), {
+        padding: FIT_PADDING,
+        maxZoom: 12,
+        ...FIT_ANIM,
+      });
     },
     fitHome: () => {
       const home = locations.filter((l) => HOME_LOCATIONS.has(l.name_cn));
-      map.fitBounds(boundsOf(home), { padding: 80, maxZoom: 14 });
+      map.fitBounds(boundsOf(home), { padding: 80, maxZoom: 14, ...FIT_ANIM });
     },
     fitCommute: () => focusLine(),
     flyTo: (location) => {

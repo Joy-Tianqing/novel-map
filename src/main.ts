@@ -89,19 +89,30 @@ async function main(): Promise<void> {
 
   // ============ 视野预设 ============
 
-  const preset = (fn: (h: MapHandles) => void): void => {
+  const viewButtons = ["view-all", "view-home", "view-commute"].map((id) =>
+    document.getElementById(id) as HTMLButtonElement,
+  );
+  // 同步 aria-pressed，向读屏器声明当前激活的预设
+  const markActiveView = (id: string): void => {
+    for (const btn of viewButtons) {
+      btn.setAttribute("aria-pressed", String(btn.id === id));
+    }
+  };
+
+  const preset = (fn: (h: MapHandles) => void, id: string): void => {
     clearSelection(); // 切换视野时重置选中态，保持画面干净
+    markActiveView(id);
     if (handles) fn(handles);
   };
 
   document.getElementById("view-all")!.addEventListener("click", () =>
-    preset((h) => h.fitAll()),
+    preset((h) => h.fitAll(), "view-all"),
   );
   document.getElementById("view-home")!.addEventListener("click", () =>
-    preset((h) => h.fitHome()),
+    preset((h) => h.fitHome(), "view-home"),
   );
   document.getElementById("view-commute")!.addEventListener("click", () =>
-    preset((h) => h.fitCommute()),
+    preset((h) => h.fitCommute(), "view-commute"),
   );
 
   // ============ 地点清单 + 故事时间线（章节筛选联动） ============

@@ -34,7 +34,7 @@ export class DetailPanel {
 
     const title = document.createElement("h2");
     title.className = "panel-title";
-    title.innerHTML = `${escapeHtml(location.name_cn)}<span class="jp">${escapeHtml(location.name_jp)}</span>`;
+    title.innerHTML = `${escapeHtml(location.name_cn)}<span class="jp" lang="ja">${escapeHtml(location.name_jp)}</span>`;
 
     const type = document.createElement("p");
     type.className = "panel-type";

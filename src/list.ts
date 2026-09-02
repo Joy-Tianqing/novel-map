@@ -36,7 +36,7 @@ export function renderLocationList(
       btn.className = "list-item";
       btn.dataset.locationId = location.id;
       btn.innerHTML =
-        `${escapeHtml(location.name_cn)}<span class="jp">${escapeHtml(location.name_jp)}</span>` +
+        `${escapeHtml(location.name_cn)}<span class="jp" lang="ja">${escapeHtml(location.name_jp)}</span>` +
         `<span class="chapters">第 ${location.chapters.join("、")} 章 · ${location.passage_pairs.length} 条引文</span>`;
       btn.addEventListener("click", () => onSelect(location));
       container.appendChild(btn);
