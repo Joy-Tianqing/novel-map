@@ -6,9 +6,13 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="川端康成《山音》中的地点文学地图" />
+    <!-- 瓦片域名预连接，加快首次地图加载 -->
+    <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
     <title>山音文学地图</title>
-    <script type="module" crossorigin src="/novel-map/assets/index-DYovYgvV.js"></script>
-    <link rel="stylesheet" crossorigin href="/novel-map/assets/index-RzuAk-f7.css">
+    <script type="module" crossorigin src="/novel-map/assets/index-284FD2ON.js"></script>
+    <link rel="stylesheet" crossorigin href="/novel-map/assets/index-4HJvYwIf.css">
   </head>
   <body>
     <div id="app">
@@ -17,9 +21,9 @@
           <h1>山音文学地图</h1>
           <p class="subtitle">川端康成《山音》中的地点</p>
           <div class="view-presets">
-            <button id="view-all" type="button">全部地点</button>
-            <button id="view-home" type="button">家附近</button>
-            <button id="view-commute" type="button">通勤路线</button>
+            <button id="view-all" type="button" aria-pressed="false">全部地点</button>
+            <button id="view-home" type="button" aria-pressed="false">家附近</button>
+            <button id="view-commute" type="button" aria-pressed="false">通勤路线</button>
           </div>
           <button id="sidebar-toggle" class="sidebar-toggle" type="button" aria-expanded="true">
             收起清单 ▴
