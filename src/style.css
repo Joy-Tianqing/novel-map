@@ -474,6 +474,11 @@ button {
     padding: 12px 16px calc(12px + var(--tl-safe));
   }
 
+  /* 手机端隐藏视野预设三按钮，减少对地图的遮挡（桌面端仍保留） */
+  .view-presets {
+    display: none;
+  }
+
   /* ---- 详情抽屉：抬到时间线上方，与时间线并存不遮挡 ---- */
   #detail-panel {
     top: auto;
